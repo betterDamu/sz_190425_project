@@ -15,6 +15,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+  #app
+    width 100%
+    height 100%
+    background #f5f5f5
+    position relative
 </style>

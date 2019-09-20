@@ -13,7 +13,7 @@ module.exports = {
         },
         resolve: {
             alias: {
-                'components': resolve('src/FooterGuide'),
+                'components': resolve('src/components'),
                 "pages":resolve('src/pages')
             }
         },
