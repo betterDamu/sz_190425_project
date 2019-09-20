@@ -5,22 +5,22 @@ const API={
         isForm:false
     },
     newContactJson:{
-        url: "/contact/new/json",
+        url: "/Msite/new/json",
         method:"post",
         isForm:false
     },
     newContactForm:{
-        url: "/contact/new/form",
+        url: "/Msite/new/form",
         method:"post",
         isForm:true
     },
     editContact:{
-        url: "/contact/edit",
+        url: "/Msite/edit",
         method:"put",
         isForm:false
     },
     delContact:{
-        url: "/contact",
+        url: "/Msite",
         method:"delete",
         isForm:false
     }

@@ -30,7 +30,7 @@ Vue.prototype.$eventBus = new Vue()
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  /* components: {
+  /* FooterGuide: {
     App
   },
   template: '<App/>' */

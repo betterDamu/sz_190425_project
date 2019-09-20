@@ -1,29 +1,5 @@
-# seller-wrap
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# 1. 搭脚手架 & 自定义配置
+# 2. 准备页面环境
+    字体图标
+    下载stylus相关包 & 创建stylus相关的文件
+    

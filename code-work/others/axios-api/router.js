@@ -38,7 +38,7 @@ function getQueryVariable(url,variable)
 	return(false);
 }
 //form-data
-router.post('/contact/new/form', koaBody, async (ctx) => {
+router.post('/Msite/new/form', koaBody, async (ctx) => {
 	let newData = ctx.request.body
 	console.log(newData)
 	id++
@@ -49,7 +49,7 @@ router.post('/contact/new/form', koaBody, async (ctx) => {
 		data: newData
 	}
 });
-router.post('/contact/new/json', async (ctx) => {
+router.post('/Msite/new/json', async (ctx) => {
 	let newData = ctx.request.body
 	console.log(newData)
 	id++
@@ -60,7 +60,7 @@ router.post('/contact/new/json', async (ctx) => {
 		data: newData
 	}
 });
-router.put('/contact/edit', async (ctx) => {
+router.put('/Msite/edit', async (ctx) => {
 	let newData = ctx.request.body
 	console.log(newData)
 	data.map((item, index) => {
@@ -74,7 +74,7 @@ router.put('/contact/edit', async (ctx) => {
 		data: newData
 	}
 });
-router.patch('/contact/edit', async (ctx) => {
+router.patch('/Msite/edit', async (ctx) => {
 	let newData = ctx.request.body
 	console.log(newData)
 	data.map((item, index) => {
@@ -88,7 +88,7 @@ router.patch('/contact/edit', async (ctx) => {
 		data: newData
 	}
 });
-router.del('/contact', async (ctx) => {
+router.del('/Msite', async (ctx) => {
 	let id =getQueryVariable(ctx.request.url,'id')
 	data = data.filter(item => item.id != id)
 	console.log(id)

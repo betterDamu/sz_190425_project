@@ -14,7 +14,7 @@ module.exports = {
         },
         resolve: {
             alias: {
-                'components': resolve('src/components'),
+                'components': resolve('src/FooterGuide'),
                 "pages":resolve('src/pages')
             }
         },

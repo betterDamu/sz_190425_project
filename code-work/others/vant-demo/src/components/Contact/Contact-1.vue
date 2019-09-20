@@ -92,14 +92,14 @@
 
                 if (this.isEdit) {
                     // this.list = this.list.map(item => item.id === info.id ? info : item);
-                    await this.contactAxios.put("/contact/edit",info)
+                    await this.contactAxios.put("/Msite/edit",info)
                     await this.getContactList()
                     this.chosenContactId = info.id;
                 } else {
                     let infoForm = new FormData()
                     infoForm.append("name",info.name)
                     infoForm.append("tel",info.tel)
-                    const newContact =  await this.contactAxios.post("/contact/new/form",infoForm);
+                    const newContact =  await this.contactAxios.post("/Msite/new/form",infoForm);
                     await this.getContactList()
                     this.chosenContactId = newContact.data.data.id;
                 }
@@ -110,7 +110,7 @@
             async onDelete(info) {
                 this.showEdit = false;
                 // this.list = this.list.filter(item => item.id !== info.id);
-                await this.contactAxios.delete("/contact",{
+                await this.contactAxios.delete("/Msite",{
                     params:{
                         id:info.id
                     }

@@ -56,9 +56,9 @@
 </template>
 
 <script>
-    import stars from "components/ele-stars/ele-stars.vue"
-    import line from "components/ele-line/ele-line.vue"
-    import list from "components/ele-list/ele-list.vue"
+    import stars from "FooterGuide/ele-stars/ele-stars.vue"
+    import line from "FooterGuide/ele-line/ele-line.vue"
+    import list from "FooterGuide/ele-list/ele-list.vue"
     export default {
         name: "ele-header",
         props:{
