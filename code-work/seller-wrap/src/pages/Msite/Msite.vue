@@ -2,7 +2,7 @@
     <section class="content">
         <div class="on">
             <section class="msite">
-                <HeaderTop :title="`昌平区北七家宏福科技园(337省道北)`">
+                <HeaderTop :title="address.name">
                     <span class="header_search" slot="left">
                       <i class="iconfont icon-sousuo"></i>
                     </span>
@@ -127,18 +127,21 @@
 </template>
 
 <script>
-    import ShopList from "components/ShopList/ShopList"
+    import ShopList from "components/ShopList/ShopList";
+    import {mapState,mapActions} from "vuex"
     export default {
         name: "Msite",
         components:{
             ShopList
         },
-        async created(){
-           const res = await this.$http.Msite.getShops({
-               latitude: 31.38098,
-               longitude: 121.50146,
-           });
-           console.log(res);
+        computed:{
+            ...mapState(["address"])
+        },
+        methods:{
+            ...mapActions(["getAddress"])
+        },
+        created(){
+            this.getAddress();
         }
     }
 </script>

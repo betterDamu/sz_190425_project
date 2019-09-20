@@ -56,7 +56,7 @@
 </template>
 
 <script>
-    import stars from "FooterGuide/ele-stars/ele-stars.vue"
+    import stars from "FooterGuide/ele-Stars/Stars.vue"
     import line from "FooterGuide/ele-line/ele-line.vue"
     import list from "FooterGuide/ele-list/ele-list.vue"
     export default {
