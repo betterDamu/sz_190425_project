@@ -6,7 +6,13 @@ const msiteAxios = axios.create({
     timeout:5000
 })
 
+// code review
 msiteAxios.interceptors.request.use((config)=>{
+    if(config.url === "/4000/position"){
+        config.url = config.url+"/"+config.params.latitude+","+config.params.longitude;
+        config.params={}
+    }
+
     Toast.loading({
         mask: true,
         message: '加载中...',

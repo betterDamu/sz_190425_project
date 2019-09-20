@@ -10,7 +10,15 @@ module.exports = {
     configureWebpack:{
         devServer:{
             port:8088,
-            proxy: 'http://localhost:4000'
+            proxy: {
+                '/4000': {
+                    target: 'http://localhost:4000',
+                    changeOrigin: true,
+                    pathRewrite: {
+                        '^/4000': '' // rewrite path
+                    },
+                }
+            }
         },
         resolve: {
             alias: {

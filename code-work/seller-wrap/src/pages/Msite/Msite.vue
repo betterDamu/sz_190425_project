@@ -134,7 +134,10 @@
             ShopList
         },
         async created(){
-           const res = await this.$http.Msite.getAddress();
+           const res = await this.$http.Msite.getShops({
+               latitude: 31.38098,
+               longitude: 121.50146,
+           });
            console.log(res);
         }
     }

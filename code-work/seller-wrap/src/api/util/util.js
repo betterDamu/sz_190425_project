@@ -13,7 +13,7 @@
 export default  (apiObjs,axiosInsatnce) => {
     const Http ={}
     for (name in apiObjs) {
-        let {url,method,isForm} = apiObjs[name]
+        let {url,method,isForm,corsUrl} = apiObjs[name]
         Http[name] = async (data,config={})=>{
             //请求携带数据的转换
             let transformData = {}
@@ -25,6 +25,9 @@ export default  (apiObjs,axiosInsatnce) => {
             }else{
                 transformData = data
             }
+
+            //跨域 代理
+            url = corsUrl ? (corsUrl+url) : url;
 
             //发请求
             let res = null;
