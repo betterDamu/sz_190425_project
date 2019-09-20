@@ -132,6 +132,10 @@
         name: "Msite",
         components:{
             ShopList
+        },
+        async created(){
+           const res = await this.$http.Msite.getAddress();
+           console.log(res);
         }
     }
 </script>

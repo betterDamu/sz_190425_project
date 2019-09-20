@@ -9,7 +9,8 @@ module.exports = {
     },
     configureWebpack:{
         devServer:{
-            port:8088
+            port:8088,
+            proxy: 'http://localhost:4000'
         },
         resolve: {
             alias: {

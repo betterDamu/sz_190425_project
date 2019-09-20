@@ -45,7 +45,7 @@
                     </form>
                     <a href="javascript:;" class="about_us">关于我们</a>
                 </div>
-                <a href="javascript:" class="go_back">
+                <a href="javascript:" class="go_back" @click="$router.replace(`/Profile`)">
                     <i class="iconfont icon-jiantou2"></i>
                 </a>
             </div>
