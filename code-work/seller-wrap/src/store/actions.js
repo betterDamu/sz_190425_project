@@ -27,11 +27,13 @@ export default {
             commit(RECEIVE_SHOPS,res.data)
         }
     },
-    async getCategorys({commit,state}){
+    async getCategorys({commit,state},callback){
         const res = await http.msite.getCategorys()
         if(res.code === OK){
             //调用mutation
             commit(RECEIVE_CATEGORY,res.data)
+            // 数据准备完毕
+            typeof callback === "function" && callback()
         }
     }
 }

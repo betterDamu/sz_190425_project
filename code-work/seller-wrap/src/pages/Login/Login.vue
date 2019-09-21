@@ -4,16 +4,19 @@
                 <div class="login_header">
                     <h2 class="login_logo">硅谷外卖</h2>
                     <div class="login_header_title">
-                        <a href="javascript:;" class="on">短信登录</a>
-                        <a href="javascript:;">密码登录</a>
+                        <a href="javascript:;" :class="{on:loginWay}" @click="loginWay=true">短信登录</a>
+                        <a href="javascript:;" :class="{on:!loginWay}" @click="loginWay=false">密码登录</a>
                     </div>
                 </div>
                 <div class="login_content">
                     <form>
-                        <div class="on">
+                        <div :class="{on:loginWay}">
                             <section class="login_message">
-                                <input type="tel" maxlength="11" placeholder="手机号">
-                                <button disabled="disabled" class="get_verification">获取验证码</button>
+                                <input type="tel" maxlength="11" placeholder="手机号" v-model="phone">
+                                <button
+                                        :disabled="!isRightPhone"
+                                        :class="[`get_verification`,{highLight:isRightPhone}]"
+                                        @click.prevent="getCode">获取验证码</button>
                             </section>
                             <section class="login_verification">
                                 <input type="tel" maxlength="8" placeholder="验证码">
@@ -23,7 +26,7 @@
                                 <a href="javascript:;">《用户服务协议》</a>
                             </section>
                         </div>
-                        <div>
+                        <div :class="{on:!loginWay}">
                             <section>
                                 <section class="login_message">
                                     <input type="tel" maxlength="11" placeholder="手机/邮箱/用户名">
@@ -53,8 +56,31 @@
 </template>
 
 <script>
+   /*
+        1. 短信 和 密码页的切换
+        2. 点亮验证码
+        3. 倒计时
+        4. 明文切换
+        5. 表单验证
+    */
     export default {
-        name: "Login"
+        name: "Login",
+        data(){
+            return {
+                loginWay:true, // true:短信登录  false:密码登录
+                phone:""
+            }
+        },
+        computed:{
+            isRightPhone(){
+                return /^1[3456789]\d{9}$/.test(this.phone)
+            }
+        },
+        methods:{
+            getCode(){
+                console.log("xxx")
+            }
+        }
     }
 </script>
 
@@ -118,6 +144,8 @@
                                 color #ccc
                                 font-size 14px
                                 background transparent
+                                &.highLight
+                                    color green
                         .login_verification
                             position relative
                             margin-top 16px

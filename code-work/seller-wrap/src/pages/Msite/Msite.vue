@@ -53,22 +53,33 @@
             }
         },
         methods:{
-            ...mapActions(["getAddress","getCategorys"])
-        },
-        created(){
-            this.getAddress();
-            this.getCategorys();
-        },
-        mounted(){
-           setTimeout(()=>{
+            ...mapActions(["getAddress","getCategorys"]),
+            // watch + $nextTick(包裹渲染函数)
+            // callback + $nextTick(包裹渲染函数)
+            // promise + 渲染函数
+            swiperRender(){
                new Swiper ('.swiper-container', {
                    loop: true,
                    pagination: {
                        el: '.swiper-pagination',
                    },
                })
-           },1000)
+            }
+        },
+        async created(){
+            this.getAddress();
+            // 分发action返回的结果是一个promise  这个promise是在数据改变并且dom更新之后才会确定
+            await this.getCategorys();
+            this.swiperRender()
         }
+       /* watch:{
+            //categorys数据发生了改变!!!   dom还没有更新
+            categorys(){
+                this.$nextTick(()=>{
+                    this.swiperRender()
+                })
+            }
+        }*/
     }
 </script>
 
