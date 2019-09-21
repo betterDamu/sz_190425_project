@@ -4,7 +4,7 @@ const API={
         method:"get",
         corsUrl:"/4000"
     },
-    getCategory:{
+    getCategorys:{
         url: "/index_category",
         method:"get",
         corsUrl:"/4000"

@@ -27,7 +27,11 @@ export default  (apiObjs,axiosInsatnce) => {
             }
 
             //跨域 代理
-            url = corsUrl ? (corsUrl+url) : url;
+            // url = corsUrl ? (corsUrl+url) : url;
+            if (corsUrl){
+                url = corsUrl+url
+                corsUrl = ""
+            }
 
             //发请求
             let res = null;

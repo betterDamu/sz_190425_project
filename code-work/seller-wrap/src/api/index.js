@@ -1,5 +1,5 @@
-import Msite from "./Msite"
+import msite from "./msite"
 
 export default {
-    Msite
+    msite
 }

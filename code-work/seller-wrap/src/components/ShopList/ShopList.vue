@@ -5,7 +5,7 @@
             <span class="shop_header_title">附近商家</span>
         </div>
         <div class="shop_container">
-            <ul class="shop_list">
+            <ul class="shop_list" v-if="shops.length > 0">
                 <li class="shop_li border-1px" v-for="shop in shops">
                     <a>
                         <div class="shop_left">
@@ -20,7 +20,7 @@
                             </section>
                             <section class="shop_rating_order">
                                 <section class="shop_rating_order_left">
-                                    <Stars :size="24" :score="shop.rating"></Stars>
+                                    <Stars class="stars" :size="24" :score="shop.rating"></Stars>
                                     <div class="rating_section">
                                         {{shop.rating}}
                                     </div>
@@ -43,6 +43,11 @@
                     </a>
                 </li>
             </ul>
+            <ul v-else>
+                <li class="shop_li border-1px" v-for="item in [1,2,3,4]">
+                    <img src="./images/shop_back.svg" >
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -52,13 +57,8 @@
     import Stars from "components/Stars/Stars.vue"
     export default {
         name: "ShopList",
-        data(){
-          return {
-              baseImgUrl:"https://fuss10.elemecdn.com"
-          }
-        },
         computed:{
-            ...mapState(["shops"])
+            ...mapState(["shops","baseImgUrl"])
         },
         methods:{
             ...mapActions(["getShops"])
@@ -160,6 +160,9 @@
                                         font-size 10px
                                         color #666
                                         transform scale(.8)
+                                    .stars
+                                        float: left;
+                                        font-size: 0;
                                 .shop_rating_order_right
                                     float right
                                     font-size 0

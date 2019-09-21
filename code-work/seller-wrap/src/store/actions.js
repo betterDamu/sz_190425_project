@@ -1,11 +1,12 @@
 import http from "@/api"
-import {RECEIVE_ADDRESS,RECEIVE_SHOPS} from "./mutation-types"
+import {RECEIVE_ADDRESS,RECEIVE_SHOPS,RECEIVE_CATEGORY} from "./mutation-types"
+import msite from "../api/msite";
 
 const OK = 0;
 export default {
     async getAddress({commit,state}){
         // 调用native的接口 获取经纬度
-        const res = await http.Msite.getAddress({
+        const res = await http.msite.getAddress({
             latitude:state.latitude,
             longitude:state.longitude
         })
@@ -16,7 +17,7 @@ export default {
        }
     },
     async getShops({commit,state}){
-        const res = await http.Msite.getShops({
+        const res = await http.msite.getShops({
             latitude:state.latitude,
             longitude:state.longitude
         })
@@ -24,6 +25,13 @@ export default {
         if(res.code === OK){
             //调用mutation
             commit(RECEIVE_SHOPS,res.data)
+        }
+    },
+    async getCategorys({commit,state}){
+        const res = await http.msite.getCategorys()
+        if(res.code === OK){
+            //调用mutation
+            commit(RECEIVE_CATEGORY,res.data)
         }
     }
 }
