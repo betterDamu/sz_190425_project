@@ -4,6 +4,7 @@ import router from "@/router"
 import store from "@/store/store.js"
 import http from "@/api"
 import HeaderTop from "components/HeaderTop/HeaderTop"
+import "./validate"
 
 Vue.prototype.$http=http;
 Vue.config.productionTip = false
