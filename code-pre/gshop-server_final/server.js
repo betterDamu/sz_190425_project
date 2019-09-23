@@ -17,8 +17,8 @@ const server = http.createServer(app)
 // 声明使用静态中间件
 app.use(express.static('public'))
 // 声明使用解析post请求的中间件
-app.use(express.urlencoded({extended: true})) // 请求体参数是: name=tom&pwd=123
-// app.use(express.json()) // 请求体参数是json结构: {name: tom, pwd: 123}
+// app.use(express.urlencoded({extended: true})) // 请求体参数是: name=tom&pwd=123
+app.use(express.json()) // 请求体参数是json结构: {name: tom, pwd: 123}
 // 声明使用解析cookie数据的中间件
 const cookieParser = require('cookie-parser')
 app.use(cookieParser())

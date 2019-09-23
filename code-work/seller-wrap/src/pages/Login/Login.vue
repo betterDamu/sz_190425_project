@@ -49,7 +49,9 @@
                                 <section class="login_message">
                                     <input type="text" maxlength="11" placeholder="验证码"
                                            v-model="captcha" name="captcha" v-validate="{required: true,regex: /^[0-9a-zA-Z]{4}$/}">
-                                    <img class="get_verification" src="./images/captcha.svg" alt="captcha">
+                                    <img class="get_verification"
+                                            src="http://localhost:4000/captcha" alt="captcha"
+                                            @click="getCaptcha" ref="captcha">
                                     <span style="color: red;" v-show="errors.has('captcha')">{{ errors.first('captcha') }}</span>
                                 </section>
                             </section>
@@ -66,13 +68,19 @@
 </template>
 
 <script>
-   /*
-        1. 短信 和 密码页的切换
-        2. 点亮验证码
-        3. 倒计时
-        4. 明文切换
-        5. 表单验证
+   /* 客户端功能:
+        1. 短信 和 密码页的切换  2. 点亮验证码  3. 倒计时
+        4. 明文切换 5. 表单验证
     */
+   /*前后台交互
+        1.  一次性图片验证码 (http请求)
+        2.  一次短信验证码   (ajax请求  请求成功之后清除倒计时)
+        3.  用户名&密码 登录
+        4.  手机号&短信 登录
+   * */
+   import {Toast} from "vant"
+   const OK = 0;
+   const ERROR = 1;
     export default {
         name: "Login",
         data(){
@@ -94,15 +102,28 @@
             }
         },
         methods:{
-            getCode(){
+            getCaptcha(){
+                this.$refs.captcha.src=`http://localhost:4000/captcha?time=${Date.now()}`
+            },
+            async getCode(){
                 // 倒计时
                 this.times = 10;
                 const timer = setInterval(()=>{
-                    this.times --
                     if(this.times === 0 ){
                         clearInterval(timer)
                     }
+                    this.times --
                 },1000)
+
+                //发送请求 去拿验证码
+                const res = await this.$http.login.sendCode({
+                    phone:this.phone
+                });
+
+                //停止倒计时
+                (res.code===OK) && (this.times = 0);
+                (res.code===ERROR) && (Toast.fail(`验证码获取失败`));
+
             },
             async login(){
                 //对表单进行统一验证

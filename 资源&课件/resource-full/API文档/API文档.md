@@ -4,11 +4,10 @@
 [1、根据经纬度获取位置详情](#1根据经纬度获取位置详情)<br/>
 [2、获取食品分类列表](#2获取食品分类列表)<br/>
 [3、根据经纬度获取商铺列表](#3根据经纬度获取商铺列表)<br/>
-[4、根据经纬度和关键字搜索商铺列表](#4根据经纬度和关键字搜索商铺列表)<br/>
-[5、获取一次性验证码](#5获取一次性验证码)<br/>
+[4、获取一次性验证码](#5获取一次性验证码)<br/>
+[5、发送短信验证码](#7发送短信验证码)<br/>
 [6、用户名密码登陆](#6用户名密码登陆)<br/>
-[7、发送短信验证码](#7发送短信验证码)<br/>
-[8、手机号验证码登陆](#8手机号验证码登陆)<br/>
+[7、手机号验证码登陆](#8手机号验证码登陆)<br/>
 [9、根据会话获取用户信息](#9根据会话获取用户信息)<br/>
 
 
@@ -180,193 +179,7 @@
             ]
 	}
 
-## 4、根据经纬度和关键字搜索商铺列表
-
-### 请求URL：
-	http://localhost:5000/search_shops
-	例子: http://localhost:5000/search_shops?keyword=test&geohash=40.10038,116.36867
-	
-### 请求方式：
-    GET
-
-### 参数类型：query
-	|参数          |是否必选  |类型     |说明|
-	|geohash      |Y       |string    |经纬度
-	|keyword      |Y       |string    |关键字
-
-### 返回示例：
-	{
-      "code": 0,
-      "data": [
-        {
-          "name": "test_shop",
-          "address": "广东省广州市海珠区马涌直街20号",
-          "id": 1196,
-          "latitude": 23.09499,
-          "longitude": 113.26166,
-          "location": [
-            113.26166,
-            23.09499
-          ],
-          "phone": "18320326523",
-          "category": "鲜花蛋糕/面包",
-          "supports": [
-            {
-              "description": "准时必达，超时秒赔",
-              "icon_color": "57A9FF",
-              "icon_name": "准",
-              "id": 9,
-              "name": "准时达",
-              "_id": "5ad00b4febf543051ea2e5f6"
-            },
-            {
-              "description": "该商家支持开发票，请在下单时填写好发票抬头",
-              "icon_color": "999999",
-              "icon_name": "票",
-              "id": 4,
-              "name": "开发票",
-              "_id": "5ad00b4febf543051ea2e5f5"
-            }
-          ],
-          "status": 1,
-          "recent_order_num": 444,
-          "rating_count": 246,
-          "rating": 4,
-          "promotion_info": "便靓正",
-          "piecewise_agent_fee": {
-            "tips": "配送费约¥5"
-          },
-          "opening_hours": [
-            "09:00/21:30"
-          ],
-          "license": {
-            "catering_service_license_image": "162bcabb96f9264.jpg",
-            "business_license_image": "162bcabb9869263.jpg"
-          },
-          "is_new": true,
-          "is_premium": true,
-          "image_path": "162bcab6f889262.jpg",
-          "identification": {
-            "registered_number": "",
-            "registered_address": "",
-            "operation_period": "",
-            "licenses_scope": "",
-            "licenses_number": "",
-            "licenses_date": "",
-            "legal_person": "",
-            "identificate_date": null,
-            "identificate_agency": "",
-            "company_name": ""
-          },
-          "float_minimum_order_amount": 20,
-          "float_delivery_fee": 5,
-          "distance": "2124.6公里",
-          "order_lead_time": "31小时27分钟",
-          "description": "普通商店",
-          "delivery_mode": {
-            "color": "57A9FF",
-            "id": 1,
-            "is_solid": true,
-            "text": "蜂鸟专送"
-          },
-          "activities": [
-            {
-              "icon_name": "减",
-              "name": "满减优惠",
-              "description": "参加活动满减优惠",
-              "icon_color": "f07373",
-              "id": 1,
-              "_id": "5ad00b4febf543051ea2e5f7"
-            }
-          ],
-          "__v": 0
-        },
-        {
-          "name": "test",
-          "address": "浙江省杭州市余杭区高教路阿里巴巴西溪园区2号楼",
-          "id": 1271,
-          "latitude": 30.27817,
-          "longitude": 120.022003,
-          "location": [
-            120.022003,
-            30.27817
-          ],
-          "phone": "111",
-          "category": "快餐便当/简餐",
-          "supports": [
-            {
-              "description": "已加入“外卖保”计划，食品安全有保障",
-              "icon_color": "999999",
-              "icon_name": "保",
-              "id": 7,
-              "name": "外卖保",
-              "_id": "5ad7101aebf543051ea30192"
-            },
-            {
-              "description": "准时必达，超时秒赔",
-              "icon_color": "57A9FF",
-              "icon_name": "准",
-              "id": 9,
-              "name": "准时达",
-              "_id": "5ad7101aebf543051ea30191"
-            },
-            {
-              "description": "该商家支持开发票，请在下单时填写好发票抬头",
-              "icon_color": "999999",
-              "icon_name": "票",
-              "id": 4,
-              "name": "开发票",
-              "_id": "5ad7101aebf543051ea30190"
-            }
-          ],
-          "status": 1,
-          "recent_order_num": 820,
-          "rating_count": 305,
-          "rating": 4.2,
-          "promotion_info": "111",
-          "piecewise_agent_fee": {
-            "tips": "配送费约¥5"
-          },
-          "opening_hours": [
-            "05:30/05:45"
-          ],
-          "license": {
-            "catering_service_license_image": "162d816cf909817.png",
-            "business_license_image": "162d816c82e9816.png"
-          },
-          "is_new": true,
-          "is_premium": true,
-          "image_path": "162d81696a79815.png",
-          "identification": {
-            "registered_number": "",
-            "registered_address": "",
-            "operation_period": "",
-            "licenses_scope": "",
-            "licenses_number": "",
-            "licenses_date": "",
-            "legal_person": "",
-            "identificate_date": null,
-            "identificate_agency": "",
-            "company_name": ""
-          },
-          "float_minimum_order_amount": 20,
-          "float_delivery_fee": 5,
-          "distance": "1265.1公里",
-          "order_lead_time": "18小时13分钟",
-          "description": "111",
-          "delivery_mode": {
-            "color": "57A9FF",
-            "id": 1,
-            "is_solid": true,
-            "text": "蜂鸟专送"
-          },
-          "activities": [],
-          "__v": 0
-        }
-      ]
-    }
-
-## 5、获取一次性验证码
+## 4、获取一次性验证码
      
 ### 请求URL：
 	http://localhost:5000/captcha
@@ -387,6 +200,40 @@
       <path fill="#e43ee4"
             d="M115.54 40.11L115.59 40.16L113.14 33.25L113.17 33.29Q108.85 20.74 102.91 14.35L102.96 14.40L102.90 14.33Q104.99 15.47 107.58 16.08L107.53 16.03L107.59 16.09Q112.75 22.40 117.09 35.15L117.02 35.08L117.09 35.15Q120.09 26.99 120.77 25.40L120.80 25.42L120.82 25.44Q123.19 19.82 126.01 16.51L125.88 16.38L125.84 16.33Q127.96 16.02 130.59 15.14L130.67 15.23L130.60 15.16Q126.13 19.87 123.09 27.10L123.06 27.08L122.98 26.99Q121.68 30.76 117.99 40.27L117.88 40.17L117.97 40.26Q117.41 40.26 116.84 40.23L116.86 40.25L116.73 40.12Q116.16 40.12 115.59 40.16ZM120.66 42.64L120.66 42.64L120.65 42.63Q123.37 32.56 124.93 28.52L124.95 28.54L124.91 28.50Q128.05 20.95 132.47 16.08L132.41 16.02L132.41 16.01Q131.30 16.32 129.21 17.04L129.20 17.03L130.52 15.88L130.34 15.70Q130.96 15.06 131.57 14.41L131.54 14.39L131.67 14.52Q128.85 15.51 125.85 16.08L125.84 16.07L125.76 15.99Q121.37 21.31 117.49 32.77L117.53 32.81L117.48 32.76Q113.78 22.59 110.58 18.21L110.61 18.24L110.77 18.39Q110.27 18.20 109.40 18.05L109.32 17.98L109.48 18.13Q109.19 17.70 107.59 15.64L107.61 15.66L107.67 15.72Q104.67 14.97 101.97 13.56L101.97 13.55L101.94 13.52Q108.58 20.62 112.95 33.41L112.84 33.30L112.83 33.28Q114.15 37.05 115.33 40.62L115.33 40.62L115.30 40.59Q115.79 40.78 116.63 40.67L116.60 40.64L116.53 40.57Q116.89 41.27 117.57 42.60L117.54 42.57L117.55 42.58Q118.32 42.44 119.05 42.51L119.07 42.54L119.07 42.53Q119.98 42.72 120.74 42.72Z"/>
     </svg>
+    
+## 5、发送短信验证码
+     
+### 请求URL：
+	http://localhost:5000/sendcode
+
+### 示例：
+[http://localhost:5000/sendcode?phone=13716962779](http://localhost:5000/sendcode?phone=13716962779)
+
+### 请求方式：
+	GET
+
+### 参数类型: query
+
+	|参数		|是否必选 |类型     |说明
+	|phone       |Y       |string   |手机号
+
+### 返回示例：
+	成功
+      {
+        "code": 0,
+      }
+	失败
+	  {
+		  "code": 1, 
+	    msg: '短信验证码发送失败'
+    }
+      
+      
+      
+      
+      
+      
+      
 
 ## 6、用户名密码登陆
      
@@ -419,37 +266,7 @@
         "msg": "用户名或密码不正确!"
       }
 
-## 7、发送短信验证码
-     
-### 请求URL：
-	http://localhost:5000/sendcode
-
-### 示例：
-[http://localhost:5000/sendcode?phone=13716962779](http://localhost:5000/sendcode?phone=13716962779)
-
-### 请求方式：
-	GET
-
-### 参数类型: query
-
-	|参数		|是否必选 |类型     |说明
-	|phone       |Y       |string   |手机号
-
-### 返回示例：
-	成功
-      {
-        "code": 0,
-      }
-	失败
-	  {
-		  "code": 1, 
-	    msg: '短信验证码发送失败'
-    }
-      
-      
-      
-      
-## 8、手机号验证码登陆
+## 7、手机号验证码登陆
      
 ### 请求URL：
 	http://localhost:5000/login_sms
@@ -506,6 +323,19 @@
       
       
       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
 ## 1. 测试接口1
 ### 请求URL:
 	http://localhost:5000/test_get
@@ -533,7 +363,6 @@
 		    "pwd": "123"
 		  }
 		}
-
 ## 2. 测试接口2
 ### 请求URL:
 	http://localhost:5000/test_post
