@@ -78,7 +78,8 @@
         3.  用户名&密码 登录
         4.  手机号&短信 登录
    * */
-   import {Toast} from "vant"
+   import {Toast} from "vant";
+   import {mapActions} from "vuex";
    const OK = 0;
    const ERROR = 1;
     export default {
@@ -102,6 +103,7 @@
             }
         },
         methods:{
+            ...mapActions(["getUser"]),
             getCaptcha(){
                 this.$refs.captcha.src=`http://localhost:4000/captcha?time=${Date.now()}`
             },
@@ -128,12 +130,27 @@
             async login(){
                 //对表单进行统一验证
                 if(this.loginWay){
-                    //短信登录
+                    //短信验证码登录
                     const success = await this.$validator.validateAll(["phone","code"])
-                    console.log(success)
+                    success && this.getUser({
+                        loginWay:this.loginWay,
+                        user:{
+                            phone:this.phone,
+                            code:this.code
+                        }
+                    })
                 }else{
+                    //用户名密码登录
                     const success = await this.$validator.validateAll(["name","pwd","captcha"])
-                    console.log(success)
+                    success && this.getUser({
+                        loginWay:this.loginWay,
+                        user:{
+                            name:this.name,
+                            pwd:this.pwd,
+                            captcha:this.captcha
+                        },
+                        getCaptcha:this.getCaptcha
+                    })
                 }
             }
         }
