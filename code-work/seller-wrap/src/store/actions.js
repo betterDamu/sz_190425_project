@@ -2,7 +2,7 @@ import http from "@/api"
 import router from "@/router"
 import {Toast} from "vant"
 import {RECEIVE_ADDRESS,RECEIVE_SHOPS,
-        RECEIVE_CATEGORY,RECEIVE_USER,REST_USER} from "./mutation-types"
+        RECEIVE_CATEGORY,RECEIVE_USER,REST_USER,AUTO_LOGIN} from "./mutation-types"
 
 const OK = 0;
 const ERROR = 1;
@@ -70,5 +70,9 @@ export default {
     },
     restUser({commit}){
         commit(REST_USER)
+    },
+    async getUserByToken({commit}){
+        const res = await http.msite.autoLogin()
+        ;(res.code === OK) && commit(AUTO_LOGIN,res.data)
     }
 }

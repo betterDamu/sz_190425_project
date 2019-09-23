@@ -22,7 +22,9 @@ msiteAxios.interceptors.request.use((config)=>{
             config.headers.Authorization=store.state.token;
         }else {
             //没有token 请求进入失败流程 跳转回登录页
-            throw new Error("没有token 请先登录")
+            let error = new Error("没有token 请先登录")
+            error.status = 401
+            throw error
         }
     }
 
@@ -56,6 +58,10 @@ msiteAxios.interceptors.response.use((res)=>{
     const {response,message} = err;
     if(response){
         // 发生异常时  请求已经抵达过后台了
+        //退出登录 跳转到登录页 进行提醒
+        store.dispatch("restUser")
+        Dialog({ message });
+        router.replace("/Login")
     }else{
         // 发生异常时 请求压根没去到后台 (请求拦截器中抛出异常  404)
         Dialog({ message });

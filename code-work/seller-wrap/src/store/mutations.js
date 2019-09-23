@@ -1,5 +1,5 @@
 import {RECEIVE_ADDRESS,RECEIVE_SHOPS,
-        RECEIVE_CATEGORY,RECEIVE_USER,REST_USER} from "./mutation-types"
+        RECEIVE_CATEGORY,RECEIVE_USER,REST_USER,AUTO_LOGIN} from "./mutation-types"
 export default {
     [RECEIVE_ADDRESS](state,address){
         state.address = address
@@ -19,5 +19,8 @@ export default {
         state.user = {};
         state.token = "";
         localStorage.removeItem("atguigu_token")
-    }
+    },
+    [AUTO_LOGIN](state,user){
+        state.user = user
+    },
 }

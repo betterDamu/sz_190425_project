@@ -6,11 +6,18 @@
 </template>
 
 <script>
-import FooterGuide from "components/FooterGuide/FooterGuide.vue"
+import FooterGuide from "components/FooterGuide/FooterGuide.vue";
+import {mapActions} from "vuex"
 export default {
   name: 'app',
   components:{
       FooterGuide
+  },
+  methods:{
+      ...mapActions(["getUserByToken"])
+  },
+  created(){
+      this.getUserByToken()
   }
 }
 </script>
