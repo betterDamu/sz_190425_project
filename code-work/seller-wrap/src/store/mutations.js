@@ -11,9 +11,13 @@ export default {
         state.categorys = categorys
     },
     [RECEIVE_USER](state,user){
-        state.user = user
+        state.user = user,
+        state.token =  user.token;
+        localStorage.setItem("atguigu_token",user.token)
     },
     [REST_USER](state,user){
-        state.user = {}
+        state.user = {};
+        state.token = "";
+        localStorage.removeItem("atguigu_token")
     }
 }

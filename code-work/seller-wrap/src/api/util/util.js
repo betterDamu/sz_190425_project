@@ -13,7 +13,7 @@
 export default  (apiObjs,axiosInsatnce) => {
     const Http ={}
     for (name in apiObjs) {
-        let {url,method,isForm,corsUrl} = apiObjs[name]
+        let {url,method,isForm,corsUrl,needToken} = apiObjs[name]
         Http[name] = async (data,config={})=>{
             //请求携带数据的转换
             let transformData = {}
@@ -40,7 +40,8 @@ export default  (apiObjs,axiosInsatnce) => {
                 config.params = (typeof config.params) !== "object" ? {} : config.params;
                 let params = Object.assign(transformData,config.params);
                 try{
-                    config = Object.assign(config,{url, method, params})
+                    // 让config携带needToken信息去拦截器
+                    config = Object.assign(config,{url, method, params,headers:{needToken}})
                     res = await axiosInsatnce(config)
                     res = Promise.resolve(res)
                 }catch (e) {
@@ -48,7 +49,7 @@ export default  (apiObjs,axiosInsatnce) => {
                 }
             }else if(method === "post" || method === "put"){
                 try{
-                    config = Object.assign(config,{url, method, data:transformData})
+                    config = Object.assign(config,{url, method, data:transformData,headers:{needToken}})
                     res = await axiosInsatnce(config)
                     res = Promise.resolve(res)
                 }catch (e) {
