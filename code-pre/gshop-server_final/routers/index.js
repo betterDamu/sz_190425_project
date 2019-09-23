@@ -180,8 +180,8 @@ router.get('/position/:geohash', function(req, res) {
 /*
 获取首页分类列表
  */
-// router.get('/index_category', checkToken, function(req, res) {
-router.get('/index_category', function(req, res) {
+router.get('/index_category', checkToken, function(req, res) {
+// router.get('/index_category', function(req, res) {
   setTimeout(function () {
     const data = require('../data/index_category.json')
     res.send({code: 0, data})
@@ -191,8 +191,8 @@ router.get('/index_category', function(req, res) {
 /*
 根据经纬度获取商铺列表
  */
-// router.get('/shops', checkToken, function(req, res) {
-router.get('/shops', function(req, res) {
+router.get('/shops', checkToken, function(req, res) {
+// router.get('/shops', function(req, res) {
   setTimeout(function () {
     const data = require('../data/shops.json')
     res.send({code: 0, data})

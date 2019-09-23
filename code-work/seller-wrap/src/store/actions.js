@@ -1,7 +1,8 @@
 import http from "@/api"
 import router from "@/router"
 import {Toast} from "vant"
-import {RECEIVE_ADDRESS,RECEIVE_SHOPS,RECEIVE_CATEGORY,RECEIVE_USER} from "./mutation-types"
+import {RECEIVE_ADDRESS,RECEIVE_SHOPS,
+        RECEIVE_CATEGORY,RECEIVE_USER,REST_USER} from "./mutation-types"
 
 const OK = 0;
 const ERROR = 1;
@@ -31,6 +32,8 @@ export default {
         const res = await http.msite.getShops({
             latitude:state.latitude,
             longitude:state.longitude
+        },{
+            headers:{Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkODNiNTYxNGVhOTJhMGRjMDE0Y2ZmNSIsImlhdCI6MTU2OTIxMDczNiwiZXhwIjoxNTY5ODE1NTM2fQ.o2YMi6CnQGzJWGAlbjWzoKUod4S6yLYo-Ij6Pn_O6nY"}
         })
 
         if(res.code === OK){
@@ -39,7 +42,9 @@ export default {
         }
     },
     async getCategorys({commit,state},callback){
-        const res = await http.msite.getCategorys()
+        const res = await http.msite.getCategorys({},{
+            headers:{Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkODNiNTYxNGVhOTJhMGRjMDE0Y2ZmNSIsImlhdCI6MTU2OTIxMDczNiwiZXhwIjoxNTY5ODE1NTM2fQ.o2YMi6CnQGzJWGAlbjWzoKUod4S6yLYo-Ij6Pn_O6nY"}
+        })
         if(res.code === OK){
             //调用mutation
             commit(RECEIVE_CATEGORY,res.data)
@@ -66,5 +71,8 @@ export default {
         //将用户信息存入state
         ;(res.code === OK) && loginSuccsee(commit,res)
         ;(res.code === ERROR) && loginFail(res)
+    },
+    restUser({commit}){
+        commit(REST_USER)
     }
 }

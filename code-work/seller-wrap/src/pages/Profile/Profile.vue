@@ -94,17 +94,27 @@
                         </div>
                     </a>
                 </section>
+                <section class="profile_my_order border-1px" v-show="user._id">
+                    <van-button type="danger" style="width: 100%" @click="restUser">退出登录</van-button>
+                </section>
             </section>
         </div>
     </section>
 </template>
 
 <script>
-    import {mapState} from "vuex"
+    import {Button} from "vant"
+    import {mapState,mapActions} from "vuex"
     export default {
         name: "Profile",
         computed:{
             ...mapState(["user"])
+        },
+        methods:{
+            ...mapActions(["restUser"]),
+        },
+        components:{
+            [Button.name]:Button
         }
     }
 </script>

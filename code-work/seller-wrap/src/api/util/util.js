@@ -40,14 +40,16 @@ export default  (apiObjs,axiosInsatnce) => {
                 config.params = (typeof config.params) !== "object" ? {} : config.params;
                 let params = Object.assign(transformData,config.params);
                 try{
-                    res = await axiosInsatnce({url, method, params})
+                    config = Object.assign(config,{url, method, params})
+                    res = await axiosInsatnce(config)
                     res = Promise.resolve(res)
                 }catch (e) {
                     res = Promise.reject(e)
                 }
             }else if(method === "post" || method === "put"){
                 try{
-                    res = await axiosInsatnce({url, method, data:transformData})
+                    config = Object.assign(config,{url, method, data:transformData})
+                    res = await axiosInsatnce(config)
                     res = Promise.resolve(res)
                 }catch (e) {
                     res = Promise.reject(e)

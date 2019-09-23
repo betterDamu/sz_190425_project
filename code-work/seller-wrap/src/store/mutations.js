@@ -1,4 +1,5 @@
-import {RECEIVE_ADDRESS,RECEIVE_SHOPS,RECEIVE_CATEGORY,RECEIVE_USER} from "./mutation-types"
+import {RECEIVE_ADDRESS,RECEIVE_SHOPS,
+        RECEIVE_CATEGORY,RECEIVE_USER,REST_USER} from "./mutation-types"
 export default {
     [RECEIVE_ADDRESS](state,address){
         state.address = address
@@ -11,5 +12,8 @@ export default {
     },
     [RECEIVE_USER](state,user){
         state.user = user
+    },
+    [REST_USER](state,user){
+        state.user = {}
     }
 }
