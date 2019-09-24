@@ -1,19 +1,32 @@
 <template>
     <div class="cartcontrol">
-        <div class="iconfont icon-remove_circle_outline"></div>
-        <div class="cart-count">1</div>
-        <div class="iconfont icon-add_circle"></div>
+        <transition name="foodCountDec">
+            <div class="iconfont icon-remove_circle_outline" v-show="food.count"
+                 @click="updateCount(false)"></div>
+        </transition>
+        <div class="cart-count" v-show="food.count">{{food.count}}</div>
+        <div class="iconfont icon-add_circle" @click="updateCount(true)"></div>
     </div>
 </template>
 
 <script>
+    import PubSub from 'pubsub-js'
     export default {
-        name: "ele-cartControl"
+        name: "ele-cartControl",
+        props:{
+            food:Object
+        },
+        methods:{
+            updateCount(isAdd){
+                PubSub.publish('updateCount', {isAdd,food:this.food});
+            }
+        }
     }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
     @import "../../common/stylus/mixins.styl"
+    @import "../../common/stylus/transition.styl"
     .cartcontrol
         font-size: 0
         .cart-decrease

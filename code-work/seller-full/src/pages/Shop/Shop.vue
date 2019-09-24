@@ -12,7 +12,7 @@
                 <router-link :to="`/Shop/${id}/shops`">商家</router-link>
             </div>
         </nav>
-        <router-view></router-view>
+        <router-view :seller="seller"></router-view>
     </div>
 </template>
 

@@ -33,7 +33,7 @@
                                             <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                                         </div>
                                         <div class="cartcontrol-wrapper">
-                                            <ele-cartControl></ele-cartControl>
+                                            <ele-cartControl :food="food"></ele-cartControl>
                                         </div>
                                     </div>
                                 </li>
@@ -41,17 +41,19 @@
                         </li>
                     </ul>
                 </div>
-                <ele-cart></ele-cart>
+                <ele-cart :selectedFoods="selectedFoods" :seller="seller"></ele-cart>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import Vue from "vue";
     import axios from "axios"
     import BScroll from 'better-scroll'
     import cart from "components/ele-cart/ele-cart"
     import cartControl from "components/ele-cartControl/ele-cartControl"
+    import PubSub from 'pubsub-js'
     const OK = 0;
     export default {
         name: "ele-goods",
@@ -63,7 +65,8 @@
             }
         },
         props:{
-            id:String
+            id:String,
+            seller:Object
         },
         computed:{
             currentIndex(){
@@ -76,6 +79,17 @@
                     this.leftScroll.scrollToElement(li,300)
                 }
                 return index
+            },
+            selectedFoods(){
+                let foods = [];
+                this.goods.forEach((good)=>{
+                    good.foods.forEach((food)=>{
+                        if(food.count && food.count>0){
+                            foods.push(food)
+                        }
+                    })
+                })
+                return  foods;
             }
         },
         methods:{
@@ -120,6 +134,23 @@
             this.$nextTick(()=>{
                 this.initTops()
             })
+
+            PubSub.subscribe('updateCount', function (msg, {isAdd,food}) {
+                if(isAdd){
+                    // 使对应的food count属性+1
+                    if(food.count){
+                        food.count ++;
+                    }else {
+                        // food.count = 1;
+                        Vue.set(food,"count",1)
+                    }
+                }else {
+                    // 使对应的food count属性-1
+                    if( food.count > 0){
+                        food.count --;
+                    }
+                }
+            });
         },
         watch:{
             goods(){

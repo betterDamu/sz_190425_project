@@ -6,3 +6,16 @@
   opacity 1
 .mask-leave-to
   opacity 0
+
+
+.foodCountDec-enter-active , .foodCountDec-leave-active
+  transition opacity .5s linear , transform .5s linear
+.foodCountDec-enter
+  opacity 0
+  transform translateX(15px) rotate(180deg)
+.foodCountDec-enter-to
+  opacity 1
+  transform translateX(0px) rotate(0deg)
+.foodCountDec-leave-to
+  opacity 0
+  transform translateX(15px) rotate(180deg)

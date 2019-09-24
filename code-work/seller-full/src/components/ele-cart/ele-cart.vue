@@ -4,17 +4,17 @@
             <div class="content">
                 <div class="content-left">
                     <div class="logo-wrapper">
-                        <div class="logo highlight">
-                            <i class="iconfont icon-shopping_cart highlight"></i>
+                        <div class="logo" :class="{highlight:selectedFoods.length>0}">
+                            <i class="iconfont icon-shopping_cart" :class="{highlight:selectedFoods.length>0}"></i>
                         </div>
-                        <div class="num">1</div>
+                        <div class="num" v-show="selectedFoods.length">{{allFoodCounts}}</div>
                     </div>
-                    <div class="price highlight">￥10</div>
-                    <div class="desc">另需配送费￥4元</div>
+                    <div class="price highlight">￥{{allPrice}}</div>
+                    <div class="desc">另需配送费￥{{seller.deliveryPrice}}元</div>
                 </div>
                 <div class="content-right">
-                    <div class="pay not-enough">
-                        还差￥10元起送
+                    <div class="pay" :class="payClass">
+                        {{payText}}
                     </div>
                 </div>
             </div>
@@ -46,7 +46,39 @@
 
 <script>
     export default {
-        name: "ele-cart"
+        name: "ele-cart",
+        props:{
+            selectedFoods:Array,
+            seller:Object
+        },
+        computed:{
+            allFoodCounts(){
+                return this.selectedFoods.reduce((add,food)=>{
+                    return add += food.count
+                },0)
+            },
+            allPrice(){
+                return this.selectedFoods.reduce((add,food)=>{
+                    return add += food.count * food.price
+                },0)
+            },
+            payClass () {
+                const {allPrice} = this
+                const {minPrice} = this.seller
+                return allPrice>=minPrice ? 'enough' : 'not-enough'
+            },
+            payText () {
+                const {allPrice} = this
+                const {minPrice} = this.seller
+                if (allPrice===0) {
+                    return `￥${minPrice}元起送`
+                } else if (allPrice < minPrice) {
+                    return `还差￥${minPrice - allPrice}元起送`
+                } else {
+                    return '去结算'
+                }
+            },
+        }
     }
 </script>
 
