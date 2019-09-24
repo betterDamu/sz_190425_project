@@ -1,12 +1,15 @@
 <template>
     <div>
-        ele-goods
+        ele-goods {{id}}
     </div>
 </template>
 
 <script>
     export default {
-        name: "ele-goods"
+        name: "ele-goods",
+        props:{
+            id:String
+        }
     }
 </script>
 

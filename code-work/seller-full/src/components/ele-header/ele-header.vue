@@ -5,7 +5,7 @@
                   style="position: absolute;left: 5px;top: 5px;color: pink"
                     @click="$router.replace(`/Msite`)">
             </span>
-            <img class="avatar" :src="seller.avatar" alt="">
+            <img class="avatar" :src="src" alt="">
             <div class="content">
                 <div class="title">
                     <i class="brand"></i>
@@ -30,7 +30,7 @@
             <span>{{seller.bulletin}}</span>
         </div>
         <div class="bg">
-            <img  :src="seller.avatar" alt="">
+            <img  :src="src" alt="">
         </div>
         <transition name="mask">
             <div class="mask" v-show="showMask">
@@ -60,18 +60,29 @@
 </template>
 
 <script>
-    import stars from "components/ele-stars/ele-stars.vue"
+    import stars from "components/Stars/Stars.vue"
     import line from "components/ele-line/ele-line.vue"
     import list from "components/ele-list/ele-list.vue"
+    import {mapState} from "vuex"
     export default {
         name: "ele-header",
         props:{
-            seller:Object
+            seller:Object,
+            id:String
         },
         data(){
             return {
                 iconClass:["decrease","discount","guarantee","invoice","special"],
                 showMask:false
+            }
+        },
+        computed:{
+            ...mapState(["shops","baseImgUrl"]),
+            src(){
+                const currentShop = this.shops.find((shop)=>{
+                    return shop.id == this.id
+                })
+                return this.baseImgUrl + currentShop.image_path
             }
         },
          components:{
@@ -83,11 +94,12 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-    @import "../../common/common-layout/stylus/mixin.styl"
-    @import "../../common/common-layout/stylus/extend.styl"
-    @import "../../common/common-layout/stylus/transition.styl"
+    @import "../../common/stylus/mixins.styl"
+    @import "../../common/stylus/extend.styl"
+    @import "../../common/stylus/transition.styl"
     .head
         position relative
+        z-index: 1;
         font-size 0
         background-color rgba(7,17,17,.5)
         overflow hidden
@@ -196,7 +208,7 @@
             top 0
             bottom  0
             z-index -1
-            filter blur(5px)
+            filter blur(3px)
             img
                 width 100%
                 height 100%

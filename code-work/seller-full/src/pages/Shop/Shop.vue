@@ -1,15 +1,15 @@
 <template>
     <div id="shop">
-        <ele-header :seller="seller"></ele-header>
+        <ele-header :seller="seller" :id="id"></ele-header>
         <nav>
             <div>
-                <router-link to="/Shop/goods">商品</router-link>
+                <router-link :to="`/Shop/${id}/goods`">商品</router-link>
             </div>
             <div>
-                <router-link to="/Shop/ratings">评价</router-link>
+                <router-link :to="`/Shop/${id}/ratings`">评价</router-link>
             </div>
             <div>
-                <router-link to="/Shop/shops">商家</router-link>
+                <router-link :to="`/Shop/${id}/shops`">商家</router-link>
             </div>
         </nav>
         <router-view></router-view>
@@ -27,10 +27,14 @@
                 seller:{}
             }
         },
+        props:{
+          id:String
+        },
         components:{
             "ele-header":header
         },
         async created(){
+            //拿到商家id 根据id去数据库中选出id对应的商家
             const  sellerData = await  axios.get("/seller")
             if(sellerData.data.errno === OK){
                 this.seller = sellerData.data.data
@@ -40,13 +44,13 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-    @import "../../common/common-layout/stylus/mixin.styl"
+    @import "../../common/stylus/mixins.styl"
     #shop
         width 100%
         height 100%
         overflow auto
         nav
-            border-1px(rgba(7,17,27,.1))
+            border-1px-damu(rgba(7,17,27,.1))
             display flex
             height 40px
             & > div

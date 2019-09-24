@@ -6,7 +6,7 @@ import http from "@/api"
 import HeaderTop from "components/HeaderTop/HeaderTop"
 import "./validate"
 import "@/mock"
-import "@/common/common-layout/stylus/icon.styl"
+import "@/common/stylus/icon.styl"
 
 Vue.prototype.$http=http;
 Vue.config.productionTip = false

@@ -1,11 +1,6 @@
 <template>
     <div class="stars" :class="starsSize">
         <div class="star" v-for="item in classArr" :class="item"></div>
-      <!--  <div class="star on"></div>
-        <div class="star on"></div>
-        <div class="star on"></div>
-        <div class="star half"></div>
-        <div class="star off"></div>-->
     </div>
 </template>
 

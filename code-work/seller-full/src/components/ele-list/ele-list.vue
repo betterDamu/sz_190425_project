@@ -22,7 +22,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-    @import "../../common/common-layout/stylus/mixin.styl"
+    @import "../../common/stylus/mixins.styl"
     .list
         width 80%
         padding 24px 12px 28px 12px

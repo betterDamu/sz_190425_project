@@ -15,10 +15,10 @@ export default [
     {path:"/Search",component:Search,meta:{showFooter:true}},
     {path:"/Login",component:Login},
     {path:"/UserDetail",component:UserDetail},
-    {path:"/Shop",component:Shop,children:[
-            {path:"goods",component:goods},
-            {path:"ratings",component:ratings},
-            {path:"shops",component:shops},
+    {path:"/Shop/:id",component:Shop,props:true,children:[
+            {path:"goods",component:goods,props:true},
+            {path:"ratings",component:ratings,props:true},
+            {path:"shops",component:shops,props:true},
             {path:"",redirect:"goods"},
     ]},
     {path:"/",redirect:"/Msite"},
