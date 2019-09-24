@@ -3,8 +3,9 @@
         <div>
             <div class="goods">
                 <div class="menu-wrapper" ref="leftWrapper">
-                    <ul>
-                        <li class="menu-item" :class="{current: currentIndex=== index}" v-for="(good,index) in goods">
+                    <ul ref="leftUL">
+                        <li class="menu-item" :class="{current: currentIndex=== index}"
+                            v-for="(good,index) in goods" @click="handleCForItem(index)">
                             <span class="text bottom-border-1px">
                                 <img class="icon" :src="good.icon" v-show="good.icon">
                                 {{good.name}}
@@ -32,7 +33,7 @@
                                             <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                                         </div>
                                         <div class="cartcontrol-wrapper">
-                                            CartControl组件
+                                            <ele-cartControl></ele-cartControl>
                                         </div>
                                     </div>
                                 </li>
@@ -40,6 +41,7 @@
                         </li>
                     </ul>
                 </div>
+                <ele-cart></ele-cart>
             </div>
         </div>
     </div>
@@ -48,6 +50,8 @@
 <script>
     import axios from "axios"
     import BScroll from 'better-scroll'
+    import cart from "components/ele-cart/ele-cart"
+    import cartControl from "components/ele-cartControl/ele-cartControl"
     const OK = 0;
     export default {
         name: "ele-goods",
@@ -65,6 +69,12 @@
             currentIndex(){
                 const {scrollY, tops} = this
                 const index = tops.findIndex((top, index) => scrollY>=top && scrollY<tops[index+1])
+                // 如果index有变动 让左边的列表运动index所在的那个节点上
+                if(index !== this.index){
+                    this.index = index;
+                    let li = this.$refs.leftUL.children[index];
+                    this.leftScroll.scrollToElement(li,300)
+                }
                 return index
             }
         },
@@ -80,6 +90,15 @@
                 })
                 this.tops = tops;
             },
+            handleCForItem(index){
+                const top = this.tops[index];
+                this.scrollY = top;
+                this.rightScroll.scrollTo(0,-top,300)
+            }
+        },
+        components:{
+            "ele-cart":cart,
+            "ele-cartControl":cartControl
         },
         async mounted(){
             let res = await axios.get("/goods")
