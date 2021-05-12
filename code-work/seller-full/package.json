@@ -14,7 +14,7 @@
     "lodash": "^4.17.15",
     "mockjs": "^1.0.1-beta3",
     "pubsub-js": "^1.7.0",
-    "swiper": "^5.0.3",
+    "swiper": "^6.5.1",
     "vant": "^2.2.2",
     "vee-validate": "^2.2.15",
     "vue": "^2.6.10",
